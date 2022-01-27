@@ -79,6 +79,11 @@ class TicketQueue {
             }
         }
     }
+    private static void testCode() {
+        IO io = new IO("test");
+        //boolean test = io.checkCRC();
+        IO.Message msg = io.decode("$nncmdxxxx,")
+    }
 
     static void printMeny() {
         String meny = "** MENY FOR BILLETTSYSTEM **\n";
@@ -93,9 +98,10 @@ class TicketQueue {
     static int getChoice() {
         String choice = scanner.nextLine();
         choice = choice.replaceAll("[^\\d]", "");
-        if (choice.matches(choice)) {
+        if (choice.matches("")) {
             return 0;
         }
-        return Integer.parseInt(choice);
+        final int i = Integer.parseInt(choice);
+        return i < 5 ? i : 0;
     }
 }

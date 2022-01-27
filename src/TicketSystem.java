@@ -46,7 +46,7 @@ class TicketSystem {
         for(Ticket ticket : tickets){
             Debug.console("nr." + ticket.getNumber() + ", ");
         }
-        Debug.console("\n\n");
+        Debug.console(Debug.NL);
     }
 
     static class Ticket {
