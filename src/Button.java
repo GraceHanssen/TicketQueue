@@ -1,15 +1,14 @@
 public class Button {
-    static enum BUTTONTYPE {
-        newTicket,
-        nextCustomer
+    static final class Type {
+        static final String newTicket = "0";
+        static final String nextCustomer = "1";
     }
     String name;
-    int id;
-    Button(String name, int id, BUTTONTYPE type, IO.SENDER sender) {
+    String type;
+    String sender;
+    Button(String name, String type, String sender) {
         this.name = name;
-        this.id = id;
         this.type = type;
         this.sender = sender;
     }
-
 }
