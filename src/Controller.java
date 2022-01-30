@@ -6,12 +6,17 @@ public class Controller {
 
     Button btnNew = new Button("Ny billett", Button.Type.nextCustomer, IO.Sender.BTNNEW);
 
-    Screen screen0 = new Screen("Kasse 1", Screen.Type.small, IO.Sender.SCR0);
-    Screen screen1 = new Screen("Kasse 2", Screen.Type.small, IO.Sender.SCR1);
-    Screen screen2 = new Screen("Kasse 3", Screen.Type.small, IO.Sender.SCR2);
-    Screen screen3 = new Screen("Kasse 4", Screen.Type.small, IO.Sender.SCR3);
+    Screen screen0 = new Screen("Kasse 1", Screen.Type.small, IO.Receiver.SCR0);
+    Screen screen1 = new Screen("Kasse 2", Screen.Type.small, IO.Receiver.SCR1);
+    Screen screen2 = new Screen("Kasse 3", Screen.Type.small, IO.Receiver.SCR2);
+    Screen screen3 = new Screen("Kasse 4", Screen.Type.small, IO.Receiver.SCR3);
 
-    Screen screenMain = new Screen("Hovedskjerme", Screen.Type.main, IO.Sender.SCRMAIN);
+    Screen screenMain = new Screen("Hovedskjerme", Screen.Type.main, IO.Receiver.SCRMAIN);
+
+    Register register0 = new Register();
+    Register register1 = new Register();
+    Register register2 = new Register();
+    Register register3 = new Register();
 }
 
 

@@ -87,10 +87,12 @@ class TicketQueue {
         IO.Message msg = io.decode(message);
         boolean checkCRC = io.checkCRC(message);
 
-        message = io.message(IO.Sender.BTN0, IO.Commands.NEXTICKET);
-        io.tx(message);
+        // Simulate New Ticket button click from customer
         message = io.message(IO.Sender.BTNNEW, IO.Commands.NEWTICKET);
         io.rx(message); // Simulate message from New Ticket Button
+        // Simulate Next Customer button click from register
+        message = io.message(IO.Sender.BTN1, IO.Commands.NEXTICKET);
+        io.rx(message);
 
         Controller controller = new Controller();
 

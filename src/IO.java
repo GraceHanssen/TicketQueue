@@ -2,26 +2,32 @@ public class IO {
     static final class Commands {
         static final String NEWTICKET = "NEW"; // In from controller: Customer clicked on a New ticket button
         static final String NEXTICKET = "NXT"; // In from controller: Staff clicked on a Next customer button
-        static final String MSGNEXT = "MS";   // Out to controller: Show next ticket on a register screen
-        static final String MSGMAIN = "MM";   // Out to controller: Show all tickets currently serviced
+        static final String MSGNEXT = "MNS";   // Out to controller: Show next ticket on a register screen
+        static final String MSGMAIN = "MNM";   // Out to controller: Show all tickets currently serviced
         static final String PRINT = "PRT";    // Out to controller: Print next ticket
     }
     static final class Sender {
-        static final String APP = "01";
-        static final String CONTROLLER = "02";
-        static final String BTN0 = "03";
-        static final String BTN1 = "04";
-        static final String BTN2 = "05";
-        static final String BTN3 = "06";
-        static final String BTNNEW = "07";
-        static final String SCR0 = "08";
-        static final String SCR1 = "09";
-        static final String SCR2 = "10";
-        static final String SCR3 = "11";
-        static final String SCRMAIN = "12";
-        static final String PRINT = "13";
+        static final String BTN0 = "00";
+        static final String BTN1 = "01";
+        static final String BTN2 = "02";
+        static final String BTN3 = "03";
+        static final String BTNNEW = "04";
+        static final String APP = "05";
+    }
+    static final class Receiver {
+        static final String REG0 = "00";
+        static final String REG1 = "01";
+        static final String REG2 = "02";
+        static final String REG3 = "03";
+        static final String SCR0 = "04";
+        static final String SCR1 = "05";
+        static final String SCR2 = "06";
+        static final String SCR3 = "07";
+        static final String SCRMAIN = "08";
+        static final String PRINT = "09";
     }
     String name;
+    private TicketSystem ticketSystem = new TicketSystem();
 
     // "$nncmdxxxx,yyyy,zzz*16";
     public String message(String sender, String cmd, String data) {
@@ -51,8 +57,25 @@ public class IO {
     protected void rx(String message) {
         Debug.console("IO.rx() received message: " + message);
         Message msg =  decode(message);
+        Integer ticketNumber;
         switch (msg.cmd) {
-
+            case Commands.NEWTICKET:
+                // Generate new ticket, send message to controller about updating screen
+                ticketNumber = ticketSystem.createTicket();
+                tx(message(Sender.APP, Commands.PRINT, ticketNumber.toString()));
+                break;
+            case Commands.NEXTICKET:
+                ticketNumber = ticketSystem.serveCustomer();
+                final int senderNumber = Integer.parseInt(msg.nn) + 5;// 4 + 5 = 9
+//                final int registerNumber =
+                final String registerScreen = "0" + String.valueOf(senderNumber); // "09"
+                switch (senderNumber) {
+                    case 9:
+                }
+                tx(message(Sender.APP, Commands.MSGNEXT, ticketNumber.toString() + "," + registerScreen));
+                break;
+            default: Debug.console("IO.rx, Invalid message command: " + msg.cmd);
+                break;
         }
     }
 

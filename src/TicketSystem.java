@@ -7,28 +7,36 @@ class TicketSystem {
 
     /**
      * Lager et nytt objekt av type TicketSystem.Ticket, skriver ut informasjon om den og legger den til i tickets listen
+     * @return
      */
-    void createTicket(){
+    Integer createTicket(){
         teller ++;
         Ticket ticket = new Ticket(teller);
         tickets.add(ticket);
 
         Debug.console("Du har fått tildelt billettnr " + ticket.getNumber() + ".");
         Debug.console("Det står "+(tickets.size()-1) +" foran deg.\n");
+
+        return teller;
     }
 
     /**
      * Henter og skriver ut informasjon om første kølapp og fjerner den
      * Gir feilmelding dersom kø er tom
+     * @return
      */
-    void serveCustomer(){
+    Integer serveCustomer(){
+        Ticket betjenes = null;
+        int ticketNumber = 0;
         if(tickets.isEmpty()){
             Debug.console("ingen i kø");
         } else {
-            Ticket betjenes = tickets.remove(0);
+            betjenes = tickets.remove(0);
+            ticketNumber = betjenes.number;
             Debug.console("Kunde med billettnr: ");
-            Debug.console(betjenes.getNumber() + " er betjent.\n");
+            Debug.console(betjenes.getNumber() + " er betjentes\n");
         }
+        return ticketNumber;
     }
 
     /**
