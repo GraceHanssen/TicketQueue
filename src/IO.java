@@ -34,7 +34,6 @@ public class IO {
         return "$" + sender + cmd + data + "*" + createCRC(sender + cmd + data) + "\r\n";
     }
     public String message(String sender, String cmd) {
-
         return "$" + sender + cmd + "*" + createCRC(sender + cmd) + "\r\n";
     }
 
@@ -45,7 +44,7 @@ public class IO {
         String[] values;
         Integer crc;
     }
-
+    protected TicketSystem getTicketSystem() { return ticketSystem; }
     protected boolean tx(String message) {
         Debug.console("IO.tx() sending message: " + message);
         return true;
@@ -59,20 +58,16 @@ public class IO {
         Message msg =  decode(message);
         Integer ticketNumber;
         switch (msg.cmd) {
-            case Commands.NEWTICKET:
+            case "NEW":
+            //case Commands.NEWTICKET:
                 // Generate new ticket, send message to controller about updating screen
                 ticketNumber = ticketSystem.createTicket();
                 tx(message(Sender.APP, Commands.PRINT, ticketNumber.toString()));
                 break;
-            case Commands.NEXTICKET:
+            case "NXT"  :
+            //case Commands.NEXTICKET:
                 ticketNumber = ticketSystem.serveCustomer();
-                final int senderNumber = Integer.parseInt(msg.nn) + 5;// 4 + 5 = 9
-//                final int registerNumber =
-                final String registerScreen = "0" + String.valueOf(senderNumber); // "09"
-                switch (senderNumber) {
-                    case 9:
-                }
-                tx(message(Sender.APP, Commands.MSGNEXT, ticketNumber.toString() + "," + registerScreen));
+                tx(message(Sender.APP, Commands.MSGNEXT, ticketNumber.toString() + "," + msg.nn));
                 break;
             default: Debug.console("IO.rx, Invalid message command: " + msg.cmd);
                 break;

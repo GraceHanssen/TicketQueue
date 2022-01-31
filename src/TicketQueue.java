@@ -83,19 +83,41 @@ class TicketQueue {
     }
     private static void testCode() {
         IO io = new IO();
+        Controller controller = new Controller();
         String message = "$nncmdxxxx,yyyy,zzz*16\r\n";
         IO.Message msg = io.decode(message);
         boolean checkCRC = io.checkCRC(message);
 
         // Simulate New Ticket button click from customer
         message = io.message(IO.Sender.BTNNEW, IO.Commands.NEWTICKET);
+        io.rx(message);
         io.rx(message); // Simulate message from New Ticket Button
-        // Simulate Next Customer button click from register
+
+        final TicketSystem ticketSystem = io.getTicketSystem();
+        final TicketSystem.Ticket ticket = ticketSystem.tickets.get(0);
+        final int ticketNdx = ticket.getNumber();
+
+        // Simulate Next Customer button click from register 1 staff
         message = io.message(IO.Sender.BTN1, IO.Commands.NEXTICKET);
         io.rx(message);
+        msg = io.decode(message);
+        int registerNumber = Integer.parseInt(msg.nn);
+        // Set current ticket served in register[registerNumber]
+        controller.register[registerNumber].setTicketNumber(ticketNdx);
 
-        Controller controller = new Controller();
+        // Simulate Next Customer button click from register 3 staff
+        message = io.message(IO.Sender.BTN3, IO.Commands.NEXTICKET);
+        io.rx(message);
+        msg = io.decode(message);
+        registerNumber = Integer.parseInt(msg.nn);
+        // Set current ticket served in register0
+        controller.register[registerNumber].setTicketNumber(ticketNdx);
 
+        // Send message to common screen about all customers served in register now
+        int[] currentCustomersServed = new int[4];
+        //for (int=0; i<4; i++) {
+        //    currentCustomersServed[i] = controller.register[i].getTicketNumber();
+        //}
         boolean foo = true;
     }
 

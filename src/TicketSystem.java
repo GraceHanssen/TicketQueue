@@ -34,7 +34,7 @@ class TicketSystem {
             betjenes = tickets.remove(0);
             ticketNumber = betjenes.number;
             Debug.console("Kunde med billettnr: ");
-            Debug.console(betjenes.getNumber() + " er betjentes\n");
+            Debug.console(betjenes.getNumber() + " betjentes\n");
         }
         return ticketNumber;
     }
