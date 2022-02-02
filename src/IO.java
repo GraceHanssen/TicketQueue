@@ -53,13 +53,18 @@ public class IO {
     // Called from class USB (not existing) running in a separate thread
     // class USB listens on an usb-port and calls io.rx(message) when a complete message has been received
     // io.rx(message) may be called directly to simulate that a message has arrived
+
+
     protected void rx(String message) {
         Debug.console("IO.rx() received message: " + message);
         Message msg =  decode(message);
         Integer ticketNumber;
         switch (msg.cmd) {
+            // case Commands.NEWTICKET
+            case "MNM":
+                tx(message(Sender.APP, Commands.MSGMAIN,msg.data));
+                break;
             case "NEW":
-            //case Commands.NEWTICKET:
                 // Generate new ticket, send message to controller about updating screen
                 ticketNumber = ticketSystem.createTicket();
                 tx(message(Sender.APP, Commands.PRINT, ticketNumber.toString()));
