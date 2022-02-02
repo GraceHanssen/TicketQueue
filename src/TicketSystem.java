@@ -9,7 +9,7 @@ class TicketSystem {
      * Lager et nytt objekt av type TicketSystem.Ticket, skriver ut informasjon om den og legger den til i tickets listen
      * @return
      */
-    Integer createTicket(){
+    int createTicket(){
         teller ++;
         Ticket ticket = new Ticket(teller);
         tickets.add(ticket);
@@ -20,12 +20,13 @@ class TicketSystem {
         return teller;
     }
 
+    Ticket getNextInQueue() { return tickets.isEmpty() ? null : tickets.get(0); }
     /**
      * Henter og skriver ut informasjon om første kølapp og fjerner den
      * Gir feilmelding dersom kø er tom
      * @return
      */
-    Integer serveCustomer(){
+    int serveCustomer(){
         Ticket betjenes = null;
         int ticketNumber = 0;
         if(tickets.isEmpty()){
