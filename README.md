@@ -17,10 +17,10 @@ TicketQueue - Inneholder main og skal vise meny og utføre brukervalg:
 
 MENY FOR BILLETTSYSTEM
 
-Trekk kølapp
-Betjen kunde
-Print kø
-Avslutt
+1 Trekk kølapp
+2 Betjen kunde
+3 Print kø
+4 Avslutt
 Der:
 
 Oppretter objekt av type TicketSystem.Ticket, skriver ut ticket informasjon og legger den til tickets
