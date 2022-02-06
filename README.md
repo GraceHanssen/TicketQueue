@@ -1,4 +1,6 @@
-https://www.w3schools.com/java/ #Tema: Objektorientert programmering
+https://www.w3schools.com/java/ 
+
+#Tema: Objektorientert programmering
 
 ##Bilettsystem, oppgave 1
 
@@ -18,9 +20,9 @@ TicketQueue - Inneholder main og skal vise meny og utføre brukervalg:
 MENY FOR BILLETTSYSTEM
 
 1 Trekk kølapp <br>
-2 Betjen kunde
-3 Print kø
-4 Avslutt
+2 Betjen kunde <br>
+3 Print kø <br>
+4 Avslutt <br>
 
 Der:
 
