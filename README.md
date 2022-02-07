@@ -33,16 +33,16 @@ Skriver ut 'Programmet avsluttes' og avslutter program
 Ref. Opprette applikasjon i Intelij.pdf på IL
 Læringsmål
 
-Parprogrammering
-Opprette konsoll applikasjon
-Opprette klasser
-Opprette klasse-konstruktører
-Opprette klasse-variabler
-Opprette klasse-metoder
-Opprette klasse-forekomster
-Kalle klasse-metoder
-Kalle statiske metoder
-Forskjell på Kø og Stakk
-Opprette og betjene kø
-Opprette og utføre tester
-Opprette og oppdatere Git-repo
+Parprogrammering<br>
+Opprette konsoll applikasjon<br>
+Opprette klasser<br>
+Opprette klasse-konstruktører<br>
+Opprette klasse-variabler<br>
+Opprette klasse-metoder<br>
+Opprette klasse-forekomster<br>
+Kalle klasse-metoder<br>
+Kalle statiske metoder<br>
+Forskjell på Kø og Stakk<br>
+Opprette og betjene kø<br>
+Opprette og utføre tester<br>
+Opprette og oppdatere Git-repo<br>
